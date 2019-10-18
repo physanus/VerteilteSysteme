@@ -4,7 +4,7 @@ import java.io.PrintStream;
 
 public class MathResult {
 
-    private ResultType resultType;
+    private final ResultType resultType;
     private boolean resultBoolean;
     private int resultInteger;
 

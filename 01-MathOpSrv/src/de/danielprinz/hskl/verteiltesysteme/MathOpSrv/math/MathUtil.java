@@ -17,7 +17,7 @@ public class MathUtil {
      * Parses and calculates an equation
      * @param equation The equation
      * @return The {@link MathResult}
-     * @throws MathException
+     * @throws MathException Parse error or Argument count / type mismatch
      */
     public static MathResult calculateEquation(String equation) throws MathException {
         equation = equation.replaceAll("\\s", "").toLowerCase();
@@ -55,7 +55,7 @@ public class MathUtil {
      * @param matcher The matcher
      * @param equation The equation
      * @return ArrayList of arguments
-     * @throws MathException
+     * @throws MathException Argument count / type mismatch
      */
     private static ArrayList<Integer> getArguments(Matcher matcher, String equation, int expectedArgumentCount) throws MathException {
         ArrayList<Integer> result = new ArrayList<>();

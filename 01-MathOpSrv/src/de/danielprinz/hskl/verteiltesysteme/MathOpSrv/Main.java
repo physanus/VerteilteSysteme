@@ -31,7 +31,7 @@ public class Main {
                         "+(a, b) \t- Add two integers\n" +
                         "-(a, b) \t- Subtract two integers\n" +
                         "*(a, b) \t- Multiply two integers\n" +
-                        "ggt(a, b) \t- Fint the greatest common divisor of two integers\n" +
+                        "ggt(a, b) \t- Find the greatest common divisor of two integers\n" +
                         "isprime(a) \t- Check whether an integer is prime or not\n\n";
 
                 System.out.println(helpMessage);
