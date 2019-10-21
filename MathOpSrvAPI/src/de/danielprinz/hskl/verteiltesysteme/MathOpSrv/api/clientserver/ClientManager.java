@@ -75,7 +75,7 @@ public class ClientManager {
      */
     public String recvLine(PrintStream printStream) throws IOException {
         String line = recvLine();
-        printStream.println("Server> " + line);
+        printStream.println("Server[@" + getConnectedIPAddress() + ":" + getConnectedPort() + "]> " + line);
         return line;
     }
 
@@ -107,6 +107,24 @@ public class ClientManager {
         sendLine(line);
         printStream.println("> " + line);
         return line;
+    }
+
+
+    /**
+     * Get the remote IP address
+     * @return The remote IP address
+     */
+    public String getConnectedIPAddress() {
+        return this.socket.getInetAddress().getHostAddress();
+    }
+
+
+    /**
+     * Get the remove port
+     * @return The remote port
+     */
+    public int getConnectedPort() {
+        return this.socket.getPort();
     }
 
 }
