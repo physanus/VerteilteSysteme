@@ -37,7 +37,7 @@ public class Main {
 
 
             } catch (IOException e) {
-                System.err.println("Client could not connect to the server. Retying..."); // TODO actually retry
+                System.err.println("Client could not connect to the server. Retying...");
                 e.printStackTrace();
             } finally {
                 try {
