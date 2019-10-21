@@ -1,6 +1,6 @@
 package de.danielprinz.hskl.verteiltesysteme.MathOpSrv.server;
 
-import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.ServerManager;
+import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.clientserver.ServerManager;
 
 import java.io.IOException;
 

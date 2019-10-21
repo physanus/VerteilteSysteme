@@ -1,4 +1,4 @@
-package de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api;
+package de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.clientserver;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
