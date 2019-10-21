@@ -176,7 +176,7 @@ class MathUtilTest {
                 // error expected
                 try {
                     Class<Throwable> exceptionClass = (Class<Throwable>) Class.forName((String) result);
-                    Assertions.assertThrows(exceptionClass, () -> MathUtil.calculateEquation(equation));
+                    Assertions.assertThrows(exceptionClass, () -> MathUtil.calculateEquation(equation).getResult());
                 } catch (ClassNotFoundException ex) {
                     ex.printStackTrace();
                     Assert.fail("Class not found: " + result);
