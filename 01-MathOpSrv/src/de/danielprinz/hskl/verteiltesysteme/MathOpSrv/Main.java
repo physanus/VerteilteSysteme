@@ -1,7 +1,7 @@
 package de.danielprinz.hskl.verteiltesysteme.MathOpSrv;
 
-import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException;
-import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathUtil;
+import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException;
+import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathUtil;
 
 import java.util.Scanner;
 
