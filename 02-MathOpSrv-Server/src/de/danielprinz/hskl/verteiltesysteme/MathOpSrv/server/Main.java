@@ -1,6 +1,9 @@
 package de.danielprinz.hskl.verteiltesysteme.MathOpSrv.server;
 
 import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.clientserver.ServerManager;
+import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException;
+import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathResult;
+import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathUtil;
 
 import java.io.IOException;
 
@@ -30,9 +33,17 @@ public class Main {
                 try {
 
                     serverManager.awaitNewConnection();
-                    serverManager.recvLine(System.out);
+                    String line = serverManager.recvLine(System.out);
 
-                    serverManager.sendLine("Hello from Server", System.out);
+                    try {
+                        MathResult mathResult = MathUtil.calculateEquation(line);
+                        serverManager.sendObject(mathResult, System.out);
+                    } catch (MathException e) {
+                        serverManager.sendObject(new MathResult<>(MathResult.Status.ERROR, "Couldn't parse equation: " + line), System.out);
+                        e.printStackTrace();
+                    }
+
+                    //serverManager.sendLine("Hello from Server", System.out);
 
                 } catch (IOException e) {
                     e.printStackTrace();

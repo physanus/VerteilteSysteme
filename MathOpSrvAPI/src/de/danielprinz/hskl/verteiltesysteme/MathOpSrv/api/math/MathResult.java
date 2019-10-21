@@ -1,44 +1,44 @@
 package de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math;
 
 import java.io.PrintStream;
+import java.io.Serializable;
 
-public class MathResult {
+public class MathResult<T> implements Serializable {
 
-    private final ResultType resultType;
-    private boolean resultBoolean;
-    private int resultInteger;
+    private final Status status;
+    private final T data;
 
-    public MathResult(boolean resultBoolean) {
-        this.resultType = ResultType.BOOLEAN;
-        this.resultBoolean = resultBoolean;
-    }
 
-    public MathResult(int resultInteger) {
-        this.resultType = ResultType.INTEGER;
-        this.resultInteger = resultInteger;
+    public MathResult(Status status, T data) {
+        this.status = status;
+        this.data = data;
     }
 
 
-    public void printResult(PrintStream printStream) {
-        if(resultType == ResultType.BOOLEAN) {
-            printStream.println(resultBoolean);
-        } else {
-            printStream.println(resultInteger);
-        }
+    public T getResult() throws MathException {
+        if(status == Status.SUCCESS)
+            return data;
+        else
+            throw new MathException(data.toString());
     }
 
 
-    public boolean isResultBoolean() {
-        return resultBoolean;
+    public void printResult(PrintStream printStream) throws MathException {
+        printStream.println(getResult());
     }
 
-    public int getResultInteger() {
-        return resultInteger;
+
+    @Override
+    public String toString() {
+        return "MathResult{" +
+                "status=" + status +
+                ", data=" + data +
+                '}';
     }
 
-    private enum ResultType {
-        BOOLEAN,
-        INTEGER
+    public enum Status {
+        SUCCESS,
+        ERROR
     }
 
 }

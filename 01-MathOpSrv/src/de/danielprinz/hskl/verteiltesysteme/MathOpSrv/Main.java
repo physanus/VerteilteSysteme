@@ -41,7 +41,7 @@ public class Main {
 
             // calculate result
             try {
-                MathUtil.calculateEquation(input).printResult(System.out);
+                System.out.println(MathUtil.calculateEquation(input).getResult());
                 System.out.println();
             } catch (MathException e) {
                 e.printStackTrace();

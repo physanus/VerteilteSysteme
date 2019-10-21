@@ -25,28 +25,29 @@ public class MathUtil {
         Matcher matcher;
         if((matcher = MATH_ADD_REGEX.matcher(equation)).find()) {
             ArrayList<Integer> arguments = getArguments(matcher, equation, 2);
-            return new MathResult(ArithmetischeOperationen.add(arguments.get(0), arguments.get(1)));
+            return new MathResult<>(MathResult.Status.SUCCESS, ArithmetischeOperationen.add(arguments.get(0), arguments.get(1)));
 
         } else if((matcher = MATH_SUB_REGEX.matcher(equation)).find()) {
             ArrayList<Integer> arguments = getArguments(matcher, equation, 2);
-            return new MathResult(ArithmetischeOperationen.sub(arguments.get(0), arguments.get(1)));
+            return new MathResult<>(MathResult.Status.SUCCESS, ArithmetischeOperationen.sub(arguments.get(0), arguments.get(1)));
 
         } else if((matcher = MATH_MUL_REGEX.matcher(equation)).find()) {
             ArrayList<Integer> arguments = getArguments(matcher, equation, 2);
-            return new MathResult(ArithmetischeOperationen.mul(arguments.get(0), arguments.get(1)));
+            return new MathResult<>(MathResult.Status.SUCCESS, ArithmetischeOperationen.mul(arguments.get(0), arguments.get(1)));
 
         } else if((matcher = MATH_GGT_REGEX.matcher(equation)).find()) {
             ArrayList<Integer> arguments = getArguments(matcher, equation, 2);
-            return new MathResult(ZahlentheoretischeOperationen.ggt(arguments.get(0), arguments.get(1)));
+            return new MathResult<>(MathResult.Status.SUCCESS, ZahlentheoretischeOperationen.ggt(arguments.get(0), arguments.get(1)));
 
         } else if((matcher = MATH_PRIME_REGEX.matcher(equation)).find()) {
             ArrayList<Integer> arguments = getArguments(matcher, equation, 1);
-            return new MathResult(ZahlentheoretischeOperationen.isprime(arguments.get(0)));
+            return new MathResult<>(MathResult.Status.SUCCESS, ZahlentheoretischeOperationen.isprime(arguments.get(0)));
 
         }
 
 
-        throw new MathException("Couldn't parse equation: " + equation);
+        return new MathResult<>(MathResult.Status.ERROR, "Couldn't parse equation: " + equation);
+        //throw new MathException("Couldn't parse equation: " + equation);
     }
 
 

@@ -155,7 +155,7 @@ class MathUtilTest {
 
                 try {
                     MathResult mathResult = MathUtil.calculateEquation(equation);
-                    Assert.assertEquals(result, mathResult.getResultInteger());
+                    Assert.assertEquals(result, mathResult.getResult());
                 } catch (MathException ex) {
                     ex.printStackTrace();
                     Assert.fail(equation);
@@ -165,7 +165,7 @@ class MathUtilTest {
 
                 try {
                     MathResult mathResult = MathUtil.calculateEquation(equation);
-                    Assert.assertEquals(result, mathResult.isResultBoolean());
+                    Assert.assertEquals(result, mathResult.getResult());
                 } catch (MathException ex) {
                     ex.printStackTrace();
                     Assert.fail(equation);
