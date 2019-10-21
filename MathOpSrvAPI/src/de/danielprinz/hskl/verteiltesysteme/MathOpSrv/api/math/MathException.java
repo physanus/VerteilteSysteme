@@ -1,4 +1,4 @@
-package de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math;
+package de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math;
 
 public class MathException extends Exception {
 

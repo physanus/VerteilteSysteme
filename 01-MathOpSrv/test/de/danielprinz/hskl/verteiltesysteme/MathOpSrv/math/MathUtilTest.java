@@ -1,5 +1,8 @@
 package de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math;
 
+import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException;
+import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathResult;
+import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathUtil;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -10,8 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class MathUtilTest {
 
     private HashMap<String, Object> testCases;
@@ -20,25 +21,25 @@ class MathUtilTest {
     void setUp() {
 
         testCases = new HashMap<String, Object>() {{
-            put("", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
+            put("", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
 
-            put("+", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
+            put("+", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("+(1,3)", 4);
             put("+(1, 3)", 4);
             put("+(01, 03)", 4);
-            put("+(1, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("+(A, 1)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
+            put("+(1, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("+(A, 1)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("+(100, 1)", 101);
             put("+(1, 100)", 101);
-            put("+(5)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("+()", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
+            put("+(5)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("+()", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("+(-5, 3)", -2);
             put("+(5, -3)", 2);
             put("+(-5, -3)", -8);
             put("+(0, 0)", 0);
 
-            put("-", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("-()", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
+            put("-", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("-()", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("-(3,1)", 2);
             put("-(3, 1)", 2);
             put("-(03, 01)", 2);
@@ -46,15 +47,15 @@ class MathUtilTest {
             put("-(-3, 1)", -4);
             put("-(3, -1)", 4);
             put("-(-3, -1)", -2);
-            put("-(3)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("-(3, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("-(A, 3)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("-(A, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("-(1)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
+            put("-(3)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("-(3, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("-(A, 3)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("-(A, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("-(1)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("-(0, 0)", 0);
 
-            put("*", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("*()", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
+            put("*", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("*()", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("*(3,1)", 3);
             put("*(3, 1)", 3);
             put("*(03, 01)", 3);
@@ -68,13 +69,13 @@ class MathUtilTest {
             put("*(0, -4)", 0);
             put("*(-3, 0)", 0);
             put("*(0, 0)", 0);
-            put("*(0)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("*(A, 3)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("*(3, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("*(A, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
+            put("*(0)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("*(A, 3)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("*(3, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("*(A, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
 
-            put("ggt", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("ggt()", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
+            put("ggt", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("ggt()", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("ggt(12,18)", 6);
             put("ggt(12, 18)", 6);
             put("ggt(0012, 0018)", 6);
@@ -83,17 +84,17 @@ class MathUtilTest {
             put("ggt(18, -12)", 6);
             put("ggt(-18, -12)", 6);
             put("ggt(3528, 3780)", 252);
-            put("ggt(A, 3780)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("ggt(3528, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("ggt(A, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("ggt(12)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
+            put("ggt(A, 3780)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("ggt(3528, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("ggt(A, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("ggt(12)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
 
-            put("isprime", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("isprime()", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
+            put("isprime", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("isprime()", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("isprime(5)", true);
             put("isprime(005)", true);
-            put("isprime(A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
-            put("isprime(5, 5)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.math.MathException");
+            put("isprime(A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("isprime(5, 5)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
 
         }};
 
@@ -154,7 +155,7 @@ class MathUtilTest {
 
                 try {
                     MathResult mathResult = MathUtil.calculateEquation(equation);
-                    assertEquals(result, mathResult.getResultInteger());
+                    Assert.assertEquals(result, mathResult.getResultInteger());
                 } catch (MathException ex) {
                     ex.printStackTrace();
                     Assert.fail(equation);
@@ -164,7 +165,7 @@ class MathUtilTest {
 
                 try {
                     MathResult mathResult = MathUtil.calculateEquation(equation);
-                    assertEquals(result, mathResult.isResultBoolean());
+                    Assert.assertEquals(result, mathResult.isResultBoolean());
                 } catch (MathException ex) {
                     ex.printStackTrace();
                     Assert.fail(equation);
