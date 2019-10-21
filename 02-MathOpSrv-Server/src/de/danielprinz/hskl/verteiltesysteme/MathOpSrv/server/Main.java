@@ -24,13 +24,27 @@ public class Main {
             System.out.println();
 
 
-            serverManager.awaitNewConnection();
-            serverManager.recvLine(System.out);
 
-            serverManager.sendLine("Hello from Server");
+            while(true) {
 
+                try {
 
+                    serverManager.awaitNewConnection();
+                    serverManager.recvLine(System.out);
 
+                    serverManager.sendLine("Hello from Server", System.out);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        serverManager.destroyConnection();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
 
 
 

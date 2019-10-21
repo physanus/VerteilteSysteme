@@ -14,36 +14,37 @@ public class Main {
 
         ClientManager clientManager = new ClientManager(HOSTNAME, PORT);
 
-
-        try {
-
-            System.out.println("Starting client...");
-            System.out.println("Connecting to the server " + HOSTNAME + ":" + PORT + "... ");
-
-            clientManager.connect();
-
-            System.out.println("Successfully connected to the server");
-            System.out.println();
-
-
-            clientManager.sendLine("Hello from Client");
-            clientManager.recvLine(System.out);
-
-
-
-
-
-
-
-
-        } catch (IOException e) {
-            System.err.println("Client could not connect to server. Retying..."); // TODO actually retry
-            e.printStackTrace();
-        } finally {
+        while(true) {
             try {
-                clientManager.destroy();
+
+                System.out.println("Starting client...");
+                System.out.println("Connecting to the server " + HOSTNAME + ":" + PORT + "... ");
+
+                clientManager.connect();
+
+                System.out.println("Successfully connected to the server");
+                System.out.println();
+
+
+                clientManager.sendLine("Hello from Client", System.out);
+                clientManager.recvLine(System.out);
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
             } catch (IOException e) {
+                System.err.println("Client could not connect to the server. Retying..."); // TODO actually retry
                 e.printStackTrace();
+            } finally {
+                try {
+                    clientManager.destroy();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 

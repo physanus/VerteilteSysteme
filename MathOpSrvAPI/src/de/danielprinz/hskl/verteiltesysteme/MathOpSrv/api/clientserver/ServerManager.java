@@ -115,4 +115,17 @@ public class ServerManager {
         ClientServerUtil.sendLine(this.dataOutputStream, line);
     }
 
+
+    /**
+     * Sends a line though the socket and prints it to the PrintStream
+     * @param printStream The PrintStream to be printed to
+     * @return The string to be transmitted
+     * @throws IOException on failure
+     */
+    public String sendLine(String line, PrintStream printStream) throws IOException {
+        sendLine(line);
+        printStream.println("> " + line);
+        return line;
+    }
+
 }
