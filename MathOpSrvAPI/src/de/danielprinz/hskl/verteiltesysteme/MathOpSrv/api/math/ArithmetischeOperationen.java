@@ -8,9 +8,10 @@ public class ArithmetischeOperationen {
      * @param a The first summand
      * @param b The second summand
      * @return The sum
+     * @throws MathException on failure
      */
     public static int add(int a, int b) {
-        return a + b;
+        return Math.addExact(a, b);
     }
 
 
@@ -19,9 +20,10 @@ public class ArithmetischeOperationen {
      * @param a The minuend
      * @param b The subtrahend
      * @return The difference
+     * @throws MathException on failure
      */
-    public static int sub(int a, int b) {
-        return a - b;
+    public static int sub(int a, int b)  {
+        return Math.subtractExact(a, b);
     }
 
 
@@ -30,9 +32,10 @@ public class ArithmetischeOperationen {
      * @param a The multiplier
      * @param b The multiplicand
      * @return The product
+     * @throws MathException on failure
      */
     public static int mul(int a, int b) {
-        return a * b;
+        return Math.multiplyExact(a, b);
     }
 
 

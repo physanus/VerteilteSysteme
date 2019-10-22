@@ -38,7 +38,10 @@ public class Main {
                         serverManager.sendObject(mathResult, System.out);
                     } catch (MathException e) {
                         serverManager.sendObject(new MathResult<>(MathResult.Status.ERROR, "Couldn't parse equation: '" + line + "'"), System.out);
-                        e.printStackTrace();
+                        //e.printStackTrace();
+                    } catch(ArithmeticException e) {
+                        serverManager.sendObject(new MathResult<>(MathResult.Status.ERROR, "Integer overflow in equation: '" + line + "'"), System.out);
+                        //e.printStackTrace();
                     }
 
                     //serverManager.sendLine("Hello from Server", System.out);

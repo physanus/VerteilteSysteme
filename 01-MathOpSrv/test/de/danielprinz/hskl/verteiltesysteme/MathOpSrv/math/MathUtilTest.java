@@ -37,6 +37,7 @@ class MathUtilTest {
             put("+(5, -3)", 2);
             put("+(-5, -3)", -8);
             put("+(0, 0)", 0);
+            put("+(2147483647, 5)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException"); // overlow
 
             put("-", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("-()", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
@@ -53,6 +54,7 @@ class MathUtilTest {
             put("-(A, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("-(1)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("-(0, 0)", 0);
+            put("-(-5, 2147483647)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException"); // underflow
 
             put("*", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("*()", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
@@ -73,6 +75,7 @@ class MathUtilTest {
             put("*(A, 3)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("*(3, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("*(A, A)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
+            put("*(2147483647, 2)", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException"); // overflow
 
             put("ggt", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");
             put("ggt()", "de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException");

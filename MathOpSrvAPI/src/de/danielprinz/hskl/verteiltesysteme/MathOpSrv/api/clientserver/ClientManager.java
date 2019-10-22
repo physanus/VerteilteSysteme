@@ -82,7 +82,8 @@ public class ClientManager {
      */
     public String recvLine(PrintStream printStream) throws IOException {
         String line = recvLine();
-        printStream.println("Server[@" + getConnectedIPAddress() + ":" + getConnectedPort() + "]> " + line);
+        //LoggerUtil.log(Level.CONFIG, "Connection established to " + getConnectedIPAddress() + ":" + getConnectedPort());
+        printStream.println("Server> " + line);
         return line;
     }
 
@@ -118,7 +119,8 @@ public class ClientManager {
      */
     public <T> T recvObject(Class<T> clazz, PrintStream printStream) throws IOException, ClassNotFoundException, ClassCastException {
         T object = recvObject(clazz);
-        printStream.println("Client[@" + getConnectedIPAddress() + ":" + getConnectedPort() + "]> " + object);
+        //LoggerUtil.log(Level.CONFIG, "Connection established to " + getConnectedIPAddress() + ":" + getConnectedPort());
+        printStream.println("Server> " + object);
         return object;
     }
 

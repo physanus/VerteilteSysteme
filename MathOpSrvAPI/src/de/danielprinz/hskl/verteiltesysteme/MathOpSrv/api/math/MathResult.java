@@ -2,6 +2,7 @@ package de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math;
 
 import java.io.PrintStream;
 import java.io.Serializable;
+import java.util.function.Function;
 
 public class MathResult<T> implements Serializable {
 
@@ -25,6 +26,11 @@ public class MathResult<T> implements Serializable {
 
     public void printResult(PrintStream printStream) throws MathException {
         printStream.println(getResult());
+    }
+
+
+    public void printResult(PrintStream printStream, Function<String, String> function) throws MathException {
+        printStream.println(function.apply(getResult().toString()));
     }
 
 
