@@ -1,8 +1,11 @@
 package de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.clientserver;
 
+import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.logger.LoggerUtil;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
 
 public class ServerManager {
 
@@ -26,7 +29,9 @@ public class ServerManager {
      * @throws IOException on failure
      */
     public void spawn() throws IOException {
+        LoggerUtil.log(Level.CONFIG, "Starting server...");
         this.serverSocket = new ServerSocket(this.port);
+        LoggerUtil.log(Level.CONFIG, "Server is running on port '" + port + "'");
     }
 
 

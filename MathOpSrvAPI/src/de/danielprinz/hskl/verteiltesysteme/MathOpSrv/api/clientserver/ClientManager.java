@@ -1,7 +1,10 @@
 package de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.clientserver;
 
+import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.logger.LoggerUtil;
+
 import java.io.*;
 import java.net.Socket;
+import java.util.logging.Level;
 
 public class ClientManager {
 
@@ -26,7 +29,7 @@ public class ClientManager {
      * @throws IOException on failure
      */
     public void connect() throws IOException {
-        System.out.println("connect()");
+        LoggerUtil.log(Level.CONFIG, "Connecting to the server " + hostname + ":" + port + "... ");
         if(socket != null && !socket.isClosed()) {
             socket.close();
         }
@@ -37,6 +40,7 @@ public class ClientManager {
         this.objectOutputStream = ClientServerUtil.getObjectOutputStream(socket);
         this.dataOutputStream = ClientServerUtil.getOutputStream(socket);
         this.objectInputStream = ClientServerUtil.getObjectInputStream(socket);
+        LoggerUtil.log(Level.CONFIG, "Successfully connected to the server");
     }
 
 

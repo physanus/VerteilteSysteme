@@ -46,7 +46,7 @@ public class MathUtil {
         }
 
 
-        return new MathResult<>(MathResult.Status.ERROR, "Couldn't parse equation: " + equation);
+        return new MathResult<>(MathResult.Status.ERROR, "Couldn't parse equation: '" + equation + "'");
         //throw new MathException("Couldn't parse equation: " + equation);
     }
 

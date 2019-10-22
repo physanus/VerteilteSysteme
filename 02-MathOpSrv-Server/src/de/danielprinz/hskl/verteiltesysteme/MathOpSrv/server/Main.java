@@ -1,11 +1,13 @@
 package de.danielprinz.hskl.verteiltesysteme.MathOpSrv.server;
 
 import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.clientserver.ServerManager;
+import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.logger.LoggerUtil;
 import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException;
 import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathResult;
 import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathUtil;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class Main {
 
@@ -14,18 +16,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ServerManager serverManager = new ServerManager(SERVER_PORT);
+        LoggerUtil.setPrefix("A2-Server");
+        final ServerManager serverManager = new ServerManager(SERVER_PORT);
+
 
 
         try {
 
-            System.out.println("Starting server...");
-
             serverManager.spawn();
-
-            System.out.println("Server is running on port '" + SERVER_PORT + "'");
-            System.out.println();
-
 
 
             while(true) {
@@ -39,7 +37,7 @@ public class Main {
                         MathResult mathResult = MathUtil.calculateEquation(line);
                         serverManager.sendObject(mathResult, System.out);
                     } catch (MathException e) {
-                        serverManager.sendObject(new MathResult<>(MathResult.Status.ERROR, "Couldn't parse equation: " + line), System.out);
+                        serverManager.sendObject(new MathResult<>(MathResult.Status.ERROR, "Couldn't parse equation: '" + line + "'"), System.out);
                         e.printStackTrace();
                     }
 
@@ -68,7 +66,7 @@ public class Main {
 
 
         } catch (IOException e) {
-            System.err.println("Server could not be started. Shutting down...");
+            LoggerUtil.log(Level.SEVERE, "Server could not be started. Shutting down...");
             e.printStackTrace();
 
             try {

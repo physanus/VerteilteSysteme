@@ -1,6 +1,7 @@
 package de.danielprinz.hskl.verteiltesysteme.MathOpSrv.client;
 
 import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.clientserver.ClientManager;
+import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.logger.LoggerUtil;
 import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathException;
 import de.danielprinz.hskl.verteiltesysteme.MathOpSrv.api.math.MathResult;
 
@@ -14,7 +15,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        LoggerUtil.setPrefix("A2-Client");
         final ClientManager clientManager = new ClientManager(HOSTNAME, PORT);
+
 
         try {
             MathResult mathResult = calculateEquation(clientManager, "Hello from Client");
@@ -26,6 +29,38 @@ public class Main {
 
         try {
             MathResult mathResult = calculateEquation(clientManager, "+(3, 4)");
+            mathResult.printResult(System.out);
+        } catch (MathException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            MathResult mathResult = calculateEquation(clientManager, "-(3, 4)");
+            mathResult.printResult(System.out);
+        } catch (MathException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            MathResult mathResult = calculateEquation(clientManager, "*(3, 4)");
+            mathResult.printResult(System.out);
+        } catch (MathException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            MathResult mathResult = calculateEquation(clientManager, "ggt(12, 18)");
+            mathResult.printResult(System.out);
+        } catch (MathException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            MathResult mathResult = calculateEquation(clientManager, "isprime(651651665)");
             mathResult.printResult(System.out);
         } catch (MathException e) {
             e.printStackTrace();
@@ -46,14 +81,9 @@ public class Main {
         Exception exception = null;
         for(int i = 3; i > 0; i--) {
             try {
-
-                System.out.println("Connecting to the server " + HOSTNAME + ":" + PORT + "... ");
                 clientManager.connect();
-                System.out.println("Successfully connected to the server");
-
                 clientManager.sendLine(equation, System.out);
                 return clientManager.recvObject(MathResult.class);
-
             } catch (IOException | ClassNotFoundException e) {
                 exception = e;
                 //e.printStackTrace();
